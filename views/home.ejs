@@ -1,0 +1,42 @@
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="https://kit.fontawesome.com/4d300accb8.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<body>
+<div id="home">
+<div id="homeelement">
+    <img src="../assets/logo.svg"/>
+  <div id="signupdiv">
+    <h1 class="head">Sign Up</h1>
+    <div>
+    <p class="errmsg" id="ptag1">Can’t be empty</p>
+    <input type="email" placeholder="Email address" class="inputelement" id="emailid" autocomplete="off"/>
+    </div>
+    <div>
+    <p class="errmsg" id="ptag2">Can’t be empty</p>
+    <input type="password" placeholder="Password (must be 6 characters)" class="inputelement" id="password1" autocomplete="off"/>
+    </div>
+    <div>
+    <p class="errmsg" id="ptag3">Can’t be empty</p>
+    <input type="password" placeholder="Repeat password" class="inputelement" id="password2" autocomplete="off"/>
+   </div>
+   <div> 
+    <p class="mismatchmsg" id="ptag4">Password not match</p>
+    <p class="mismatchmsg" id="ptag5">Enter the valid email</p>
+    <button type="submit" id="submitbtn" onclick="checkvalues()">Create an account</button>
+   </div>
+   <p class="changelogin">Already have an account?<span class="clicklogin" style="color: #FC4747 ;"> Login</span></p>
+  </div>
+
+  <div id="logindiv">
+    <h1 class="head">Login</h1>
+    <input type="text" placeholder="Email address" class="inputelement" id="enteremail" required autocomplete="off"/>
+    <p id="ptag6">Can’t be empty</p>
+    <p id="ptag7">Invalid Email Address</p>
+    <button type="submit" id="submitbtn" onclick="createlogin()">Login to your account</button>
+   <p class="changelogin">Don’t have an account?<span class="clicksignup" style="color: #FC4747 ;"> Sign Up</span></p>
+  </div>
+</div>
+</div>
+<script src="js/login.js"></script>
+<script src="js/video.js"></script>
+</body>

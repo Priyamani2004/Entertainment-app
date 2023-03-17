@@ -1,0 +1,135 @@
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+<script src="https://kit.fontawesome.com/4d300accb8.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/4d300accb8.js" crossorigin="anonymous"></script>
+<body>
+<div id="whole">
+    <div id="opaciti">
+        <div class="cleardiv">
+            <div></div>
+            <i class="fa-solid fa-xmark icon"></i>
+        </div>
+        <div id="videodiv"></div>
+    </div>
+<div id="border">
+    <div id="header">
+        <img src="/assets/logo.svg"/>
+        <i class="fa-solid fa-house icons" id="fonticon" onclick="allpictures(); changepic(this,3)"></i>
+        <% let movie=" Movie";
+           let serial=" TV Series";
+        %>
+        <p class="hoverptag">home</p>
+        <img src="/assets/icon-nav-movies.svg" class="sideimg" onclick="moviepictures(this,'<%=movie%>'); changepic(this,0)"/>
+        <p class="hoverptag">Movies</p>
+        <img src="/assets/icon-nav-tv-series.svg" class="sideimg" onclick="moviepictures(this,'<%=serial%>'); changepic(this,1)"/>
+        <p class="hoverptag">TV Series</p>
+        <img src="/assets/icon-nav-bookmark.svg" class="sideimg" onclick="bookmarkmovie(); changepic(this,2)"/>
+        <p class="hoverptag">Book marks</p>
+        <div></div>
+        <img src="/assets/image-avatar.png" class="humanimg"/>
+    </div>
+</div>
+<div id="container">
+    <div class="searchdiv">
+        <div id="searchbar">
+            <img src="/assets/icon-search.svg"/>
+            <input id="searchitem" placeholder="Search for movies or TV series" onkeyup="filteringimg()" type="text"/>
+        </div>
+        <div></div>
+        <form action="/logout" method="post">
+        <button id="logout">logout</button>
+       </form>
+    </div>
+    <div>
+        <div id="homecontainer">
+            <div id="content">
+                <h2 id="trendptag">Trending</h2>
+                <div id="trending">
+                    
+                    <% for(let i=0; i< 5; i++){ %>
+                        <% let data=result[i];
+                           let imgurl=JSON.parse(data.datas).thumbnail.trending.large;
+                           let year=JSON.parse(data.datas).year;
+                           let Value=i;
+                        %>
+                        <div class="need_hiding">
+                        <div id="trendmovie" style="background-image: url('<%= imgurl %>'); background-size: cover;">
+                            <div class="bookmarkdiv">
+                                <div>
+                                    <p class="addtitle"><%=JSON.parse(data.datas).title%></p>
+                                </div>
+                                <div class="bkmarkdiv" style="background-image: url('../assets/icon-bookmark-empty.svg');" onclick="addbookmark(this)"></div>
+                            </div>
+                            <div class="addplay">
+                                <button class="startbtn"value="<%= Value %>" >
+                                    <img src="/assets/icon-play.svg"/>
+                                    <p class="play">Play</p>
+                                </button>
+                            </div>
+                            <div class="moviedetail">
+                                <p class="ptag"><%=JSON.parse(data.datas).year%></p>
+                                <% var category = JSON.parse(data.datas).category; %>
+                                <% if (category === "Movie") { %>
+                                  <li class="ptag"><img src="/assets/icon-category-movie.svg"/> <%= category %></li>
+                                <% } else { %>
+                                  <li class="ptag"><img src="/assets/icon-category-tv.svg"/> <%= category %></li>
+                                <% } %>
+                                
+                                <li class="ptag"><%=JSON.parse(data.datas).rating%></li>
+                            </div>
+                            <div class="moviename">
+                                <h2 class="title"><%=JSON.parse(data.datas).title%></h2>
+                            </div>
+                        </div>
+                    </div>
+                      <% } %>  
+                </div>
+                <div id="recommended">
+                    <h3 id="trendheads">Recommended for you</h3>
+                    <div id="allpictures">
+                        <% for(let i=6; i< result.length; i++){%>
+                            <%let detail=result[i];
+                            let idValue=i;
+                            let picture=JSON.parse(detail.datas).thumbnail.regular.large;%>
+                            <div id="movieimages" >
+                                <div class="moviepic" style="background-image: url('<%= picture %>'); background-size: cover;">
+                                    <div class="bookmarkdiv">
+                                        <div>
+                                            <p class="addtitle"><%=JSON.parse(detail.datas).title%></p>
+                                        </div>
+                                        <div class="bkmarkdiv" style="background-image: url('../assets/icon-bookmark-empty.svg');" onclick="addbookmark(this)"></div>
+                                    </div>
+                                    <div class="playelement">
+                                       <button class="startbtn"value="<%= idValue %>" >
+                                        <img src="/assets/icon-play.svg"/>
+                                         <p class="play">Play</p>
+                                       </button> 
+                                    </div>
+                                </div>
+                                <div id="imagedetail">
+                                    <div id="firstdiv">
+                                        <p class="ptag"><%=JSON.parse(detail.datas).year%></p>
+                                        <% var category = JSON.parse(detail.datas).category; %>
+                                          <% if (category === "Movie") { %>
+                                           <li class="ptag"><img src="/assets/icon-category-movie.svg"/> <%= category %></li>
+                                            <% } else { %>
+                                             <li class="ptag"><img src="/assets/icon-category-tv.svg"/> <%= category %></li>
+                                            <% } %>
+                                        <li class="ptag"><%=JSON.parse(detail.datas).rating%></li>
+                                    </div>
+                                    <div class="picname">
+                                        <h2 class="title"><%=JSON.parse(detail.datas).title%></h2>
+                                    </div>
+                                </div>
+                            </div>
+                        <%}%>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+ <script src="js/script.js"></script> 
+ <script src="js/video.js"></script>
+</body> 
